@@ -1,45 +1,50 @@
 @{
-    ViewData["Title"] = "Home Page";
+ViewData["Title"] = "Home Page";
 }
 <style>
-   
-.list_item_container {
-    width: 300px;
-    height: 60px;
-    padding: 5px 0;
-}
+    .list_item_container {
+        width: 300px;
+        height: 60px;
+        padding: 5px 0;
+    }
 
-.image {
-    width: 60px;
-    height: 60px;
-    margin-right: 10px;
-    float: left;
-}
+    .image {
+        width: 60px;
+        height: 60px;
+        margin-right: 10px;
+        float: left;
+    }
 </style>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" integrity="sha512-aOG0c6nPNzGk+5zjwyJaoRUgCdOrfSDhmMID2u4+OIslr0GjpLKo7Xm0Ao3xmpM4T8AmIouRkqwj1nrdVsLKEQ==" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css"
+    integrity="sha512-aOG0c6nPNzGk+5zjwyJaoRUgCdOrfSDhmMID2u4+OIslr0GjpLKo7Xm0Ao3xmpM4T8AmIouRkqwj1nrdVsLKEQ=="
+    crossorigin="anonymous" />
 
-  <div class="col-sm-12" style="text-align:right;padding-right:20px;padding-top:10px;">
-              <input class="form-control" id="searchInput" name="search" style="display:inline; width:250px;" placeholder="Search" />
-              
-              <input type="submit" value="search" class="btn btn-primary" style="display: inline;" />
-              <div id="x"></div>
-      </div>
+<div class="col-sm-12" style="text-align:right;padding-right:20px;padding-top:10px;">
+    <input class="form-control" id="searchInput" name="search" style="display:inline; width:250px;"
+        placeholder="Search" />
+
+    <input type="submit" value="search" class="btn btn-primary" style="display: inline;" />
+    <div id="x"></div>
+</div>
 
 
 <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js" integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30=" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"
+    integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30=" crossorigin="anonymous"></script>
 
 
 
 <script type="text/javascript">
-        $(document).ready(function () {
-            $('#searchInput').autocomplete({
+    $(document).ready(function () {
+        $('#searchInput').autocomplete({
                 minLength: 1,
                 source: function (request, response) {
                     $.ajax({
                         url: 'Home/AutoComplete',
                         method: 'GET',
-                        data: { prefix: request.term },
+                        data: {
+                            prefix: request.term
+                        },
                         dataType: 'json',
                         success: function (data) {
                             response(data);
@@ -54,15 +59,15 @@
             })
             .autocomplete('instance')._renderItem = function (ul, item) {
                 return $('<li>')
-                    .append("<img class='imageClass' src=" +"images/" + item.image + " alt=" + item.name + "/>")
+                    .append("<img class='imageClass' src=" + "images/" + item.image + " alt=" + item.name +
+                        "/>")
                     .append('<a>' + item.name + '</a>')
                     .appendTo(ul);
             };
 
-            function updateTextBox(event, ui) {
-                $(this).val(ui.item.name);
-                return false;
-            }
-        });
-    </script>
-    
+        function updateTextBox(event, ui) {
+            $(this).val(ui.item.name);
+            return false;
+        }
+    });
+</script>
