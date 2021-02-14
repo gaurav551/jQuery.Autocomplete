@@ -18,10 +18,10 @@ namespace JQuery.AutoComplete.Controllers
         {
             Doctors = new List<Doctor>(){
                 new Doctor(){Id=1, Name="gaurav", Image = "unnamed(1).png"},
-                 new Doctor(){Id=2, Name="gaurav1", Image = "unnamed(2).png"},
-                  new Doctor(){Id=3, Name="gaurav2", Image = "unnamed(3).png"},
-                   new Doctor(){Id=4, Name="gaurav3", Image = "unnamed.png"},
-                    new Doctor(){Id=5, Name="gaurav4", Image = "unnamed(1).png"},
+                new Doctor(){Id=2, Name="gaurav1", Image = "unnamed(2).png"},
+                new Doctor(){Id=3, Name="gaurav2", Image = "unnamed(3).png"},
+                new Doctor(){Id=4, Name="gaurav3", Image = "unnamed.png"},
+                new Doctor(){Id=5, Name="gaurav4", Image = "unnamed(1).png"},
             };
             _logger = logger;
         }
@@ -41,24 +41,19 @@ namespace JQuery.AutoComplete.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
-       [HttpGet]
-    public IActionResult AutoComplete(string prefix)
-    {
-               var customers = (from customer in Doctors
-                         where 
-                         customer.Name.Replace("'", "").Replace("\"", "").Replace("#", "").Replace("/", "").Replace("-", "").Contains(prefix)
-                         select new
-                         {
-                             customer.Name,
-                             customer.Image
-                         }).ToList();
-                     
-   
-    
-
- 
-        return Json(customers);
-    }
+        [HttpGet]
+        public IActionResult AutoComplete(string prefix)
+        {
+            var customers = (from customer in Doctors
+                             where
+                             customer.Name.Replace("'", "").Replace("\"", "").Replace("#", "").Replace("/", "").Replace("-", "").Contains(prefix)
+                             select new
+                             {
+                                 customer.Name,
+                                 customer.Image
+                             }).ToList();
+            return Json(customers);
+        }
     }
     public class Doctor
     {
